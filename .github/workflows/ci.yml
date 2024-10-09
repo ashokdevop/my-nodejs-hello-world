@@ -29,11 +29,10 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-          npx install -g sonarqube-scanner
-          sonarqube-scanner \
+          npx sonarqube-scanner \
             -Dsonar.projectKey=my-nodejs-hello-world \
             -Dsonar.sources=. \
-            -Dsonar.host.url=https://your-sonarqube-server-url \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
     - name: Build Docker image

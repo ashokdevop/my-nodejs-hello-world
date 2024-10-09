@@ -36,4 +36,4 @@ jobs:
 
     - name: Push Docker image to Docker Hub
       run: |
-        docker push asmanjan/nodejs:latest
+        docker push asmanjan/nodejs-image:latest

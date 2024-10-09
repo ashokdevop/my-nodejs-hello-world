@@ -31,7 +31,7 @@ jobs:
           -Dsonar.projectKey=nodejs \
           -Dsonar.sources=. \
           -Dsonar.host.url=http://localhost:9000 \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
     
     - name: Build Docker image

@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-hello-world",
+  "name": "my-nodejs-hello-world",
   "version": "1.0.0",
   "description": "Hello World sample app",
   "main": "index.js",
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fhinkel/nodejs-hello-world.git"
+    "url": "git+https://github.com/abhipratapsingh21/nodejs-hello-world.git"
   },
-  "author": "fhinkel",
-  "license": "MIT",
+  "author": "",
+  "license": "abhipratapsingh21",
   "bugs": {
-    "url": "https://github.com/fhinkel/nodejs-hello-world/issues"
+    "url": "https://github.com/abhipratapsingh21/my-nodejs-hello-world/issues"
   },
-  "homepage": "https://github.com/fhinkel/nodejs-hello-world#readme"
+  "homepage": "https://github.com/abhipratapsingh21/my-nodejs-hello-world#readme"
 }

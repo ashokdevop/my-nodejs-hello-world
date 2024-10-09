@@ -23,14 +23,7 @@ jobs:
    
     - name: Install SonarQube Scanner
       run: npm install -g sonarqube-scanner  
-
-  # Add the SonarQube analysis step below
-    - name: SonarQube Scan
-    - uses: sonarsource/sonarqube-scan-action@v3
-      env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-     
+    
     - name: Build Docker image
       run: |
         docker build -t asmanjan/nodejs-image:latest .

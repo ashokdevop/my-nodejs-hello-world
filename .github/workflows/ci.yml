@@ -36,8 +36,3 @@ jobs:
     - name: Push Docker image to Docker Hub in registry
       run: |
         docker push asmanjan/nodejs-image:latest
-      uses: docker/build-push-action@v5
-      with:
-        push: true
-        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nodejs-image:${{ github.sha }}
-        

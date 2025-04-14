@@ -20,9 +20,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+
     - name: Build Docker image
       run: |
         docker build -t asmanjan/nodejs-image:latest .
+
     - name: Log in to Docker Hub
       uses: azure/docker-login@v1
       with:
@@ -34,5 +36,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nodejs-image:latest:${{ github.sha }}
-      
+        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nodejs-image:latest-${{ github.sha }}

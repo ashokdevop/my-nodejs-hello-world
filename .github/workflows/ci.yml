@@ -1,4 +1,4 @@
-name: CI/CD Pipeline testing
+name: CI/CD Pipeline testing Github actions
 
 on:
   push:

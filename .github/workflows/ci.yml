@@ -67,4 +67,4 @@ jobs:
         images: |
           githubactionacr.azurecr.io/nodejs-image:latest:${{ github.sha }}
         imagepullsecrets: |
-          K8SECRET   
+          mysecret1   

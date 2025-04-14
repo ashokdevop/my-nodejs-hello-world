@@ -43,14 +43,14 @@ jobs:
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: aksdemocluster
-        resource-group: aksdemo
+        resource-group: githubdemoacr-rg
         
     - uses: Azure/k8s-create-secret@v1
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: k8s-secret
+        secret-name: ${{ secrets.K8SECRET }} 
 
     - uses: Azure/k8s-deploy@v1
       with:
@@ -59,4 +59,4 @@ jobs:
         images: |
           githubactionacr.azurecr.io/nodejs-image:latest:${{ github.sha }}
         imagepullsecrets: |
-          k8s-secret   
+          K8SECRET   

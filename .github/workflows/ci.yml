@@ -38,6 +38,14 @@ jobs:
         push: true
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nodejs-image:latest-${{ github.sha }}
 
+    - name: Create Docker registry secret
+      run: |
+         kubectl create secret docker-registry mysecret1 \
+            --docker-server=${{ secrets.REGISTRY_LOGIN_SERVER }} \
+            --docker-username=${{ secrets.REGISTRY_USERNAME }} \
+            --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+            --docker-email=gashokkumar8585@gmail.com   -n demo-deployment
+
      # Set the target AKS cluster.
     - uses: Azure/aks-set-context@v1
       with:
@@ -50,7 +58,7 @@ jobs:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: mysecret
+        secret-name: mysecret1
 
     - uses: Azure/k8s-deploy@v1
       with:

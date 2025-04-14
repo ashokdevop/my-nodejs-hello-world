@@ -50,7 +50,7 @@ jobs:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: ${{ secrets.K8SECRET }} 
+        secret-name: my-secret
 
     - uses: Azure/k8s-deploy@v1
       with:

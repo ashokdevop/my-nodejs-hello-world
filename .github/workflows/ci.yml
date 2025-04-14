@@ -37,7 +37,12 @@ jobs:
       with:
         push: true
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nodejs-image:latest-${{ github.sha }}
-
+    - name: Set up Kubeconfig
+      env:
+        KUBECONFIG: $HOME/.kube/config
+      run: |
+       mkdir -p $HOME/.kube
+       echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
     - name: Create Docker registry secret
       run: |
          kubectl create secret docker-registry mysecret1 \
@@ -59,12 +64,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
         secret-name: mysecret1
-    - name: Set up Kubeconfig
-      env:
-        KUBECONFIG: $HOME/.kube/config
-      run: |
-       mkdir -p $HOME/.kube
-       echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config   
+       
 
     - uses: Azure/k8s-deploy@v1
       with:

@@ -32,45 +32,37 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Push Docker image to Docker Hub in registry
-      uses: docker/build-push-action@v5
+    - name: Push Docker image to Docker Hub
+      uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nodejs-image:latest-${{ github.sha }}
+        tags: asmanjan/nodejs-image:latest
+
     - name: Set up Kubeconfig
       env:
         KUBECONFIG: $HOME/.kube/config
       run: |
-       mkdir -p $HOME/.kube
-       echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+        mkdir -p $HOME/.kube
+        echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+
+    - name: Ensure namespace exists
+      run: |
+        kubectl create namespace demo-deployment || true
+
     - name: Create Docker registry secret
       run: |
-         kubectl create secret docker-registry mysecret1 \
-            --docker-server=${{ secrets.REGISTRY_LOGIN_SERVER }} \
-            --docker-username=${{ secrets.REGISTRY_USERNAME }} \
-            --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
-            --docker-email=gashokkumar8585@gmail.com   -n demo-deployment
-
-     # Set the target AKS cluster.
-    - uses: Azure/aks-set-context@v1
-      with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        cluster-name: aksdemocluster
-        resource-group: githubdemoacr-rg
-        
-    - uses: Azure/k8s-create-secret@v1
-      with:
-        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: mysecret1
-       
+        kubectl create secret docker-registry mysecret1 \
+          --docker-server=${{ secrets.REGISTRY_LOGIN_SERVER }} \
+          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
+          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+          --docker-email=gashokkumar8585@gmail.com \
+          -n demo-deployment
 
     - uses: Azure/k8s-deploy@v1
       with:
         manifests: |
           manifests/deployment.yaml
         images: |
-          githubactionacr.azurecr.io/nodejs-image:latest:${{ github.sha }}
+          asmanjan/nodejs-image:latest
         imagepullsecrets: |
-          mysecret1   
+          mysecret1

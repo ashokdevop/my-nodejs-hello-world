@@ -49,14 +49,14 @@ jobs:
       run: |
         kubectl create namespace demo-deployment || true
 
-    - name: Create Docker registry secret
-      run: |
-        kubectl create secret docker-registry mysecret1 \
-          --docker-server=${{ secrets.REGISTRY_LOGIN_SERVER }} \
-          --docker-username=${{ secrets.REGISTRY_USERNAME }} \
-          --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
-          --docker-email=gashokkumar8585@gmail.com \
-          -n demo-deployment
+    #- name: Create Docker registry secret
+    #  run: |
+     #   kubectl create secret docker-registry mysecret1 \
+     #     --docker-server=${{ secrets.REGISTRY_LOGIN_SERVER }} \
+     #     --docker-username=${{ secrets.REGISTRY_USERNAME }} \
+      #    --docker-password=${{ secrets.REGISTRY_PASSWORD }} \
+      #    --docker-email=gashokkumar8585@gmail.com \
+      #    -n demo-deployment
 
     - uses: Azure/k8s-deploy@v1
       with:

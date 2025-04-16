@@ -1,22 +1,22 @@
-name: Create AKS Cluster and ACR
+name: AKS Create Workflow
 
 on:
-  workflow_dispatch: # Allows manual triggering of the workflow
+  workflow_dispatch: # Allows manual triggering of this workflow
+  push:
+    tags:
+      - 'infra-*' # Trigger only on tags prefixed with 'infra-'
 
 jobs:
-  create-aks-and-acr:
+  aks-create:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Log in to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }} # Store Azure credentials in GitHub Secrets
-
-      - name: Run AKS and ACR Creation Script
-        run: |
-          chmod +x ./path/to/your/script.sh
-          ./path/to/your/script.sh
+    - name: Run AKS Creation Script
+      run: |
+        chmod +x ./path/to/your/aks-create-script.sh
+        ./path/to/your/aks-create-script.sh

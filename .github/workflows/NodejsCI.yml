@@ -67,12 +67,6 @@ jobs:
       #    --docker-email=gashokkumar8585@gmail.com \
       #    -n demo-deployment
 
-    - uses: Azure/k8s-deploy@v1
-      with:
-       manifests: |
-        .github/workflows/Deployment.yml
-       images: |
-        nodejs-image:latest
-       imagepullsecrets: |
-        mysecret1
-       arguments: '--namespace=demo-deployment' # Specify the namespace here
+    - name: Deploy to Kubernetes
+      run: |
+       kubectl apply -f .github/workflows/Deployment.yml --namespace=demo-deployment

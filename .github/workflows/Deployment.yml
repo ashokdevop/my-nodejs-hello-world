@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: my-nodejs-app
-        image: ashokdevop/my-nodejs-app:latest
+        image: asmanjan/nodejs-image:latest
         ports:
         - containerPort: 3000
         resources:

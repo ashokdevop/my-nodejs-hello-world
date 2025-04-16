@@ -1,0 +1,22 @@
+name: Create AKS Cluster and ACR
+
+on:
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  create-aks-and-acr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }} # Store Azure credentials in GitHub Secrets
+
+      - name: Run AKS and ACR Creation Script
+        run: |
+          chmod +x ./path/to/your/script.sh
+          ./path/to/your/script.sh

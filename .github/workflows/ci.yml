@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+    paths-ignore: # Ignore specific files or directories
+      - '.github/workflows/aks-create.yml'
+  pull_request:
+    branches:
+      - main
+    paths-ignore: # Ignore specific files or directories
+      - '.github/workflows/aks-create.yml'  
 
 jobs:
   build:

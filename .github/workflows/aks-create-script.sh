@@ -1,4 +1,5 @@
-#!/bin/sh
+!/bin/sh
+echo "Starting AKS cluster creation..."
 
 # This is the shell script for creating AKS cluster, ACR Repo and a namespace
 

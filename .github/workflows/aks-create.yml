@@ -18,5 +18,5 @@ jobs:
 
     - name: Run AKS Creation Script
       run: |
-        chmod +x .github/workflows/aks-create-script.sh
-        .github/workflows/aks-create-script.sh
+        chmod +x ./correct/path/to/aks-create-script.sh
+       ./correct/path/to/aks-create-script.sh
